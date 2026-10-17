@@ -1,0 +1,14 @@
+# Only source goes into the image; builds and dependencies are made inside it. Local settings
+# (.env holds the development database password) never leave this machine.
+node_modules
+**/node_modules
+**/dist
+**/*.tsbuildinfo
+coverage
+.git
+.env
+.env.*
+!.env.example
+*.log
+load-results.json
+docs

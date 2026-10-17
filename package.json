@@ -1,0 +1,38 @@
+{
+  "name": "circuit-breaker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "CIRCUIT BREAKER: a 2-8 player futuristic racing game where players rewire the track while they race.",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @circuit-breaker/client",
+    "dev:server": "npm run dev -w @circuit-breaker/server",
+    "build": "npm run typecheck -w @circuit-breaker/shared && npm run build -w @circuit-breaker/client && npm run build -w @circuit-breaker/server",
+    "start": "node --enable-source-maps apps/server/dist/index.js",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "npm run test --workspaces --if-present",
+    "check": "npm run typecheck && npm run lint && npm run test && npm run build"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.12.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.9",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.71.1"
+  }
+}

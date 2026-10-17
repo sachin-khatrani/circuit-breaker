@@ -1,0 +1,32 @@
+# Render Blueprint: the game (one Docker web service) and its PostgreSQL database.
+# The web service serves the built client, Socket.IO and the race server on one origin. Rooms
+# and races live in its memory, so it must stay a single instance. Render injects PORT.
+# Profiles, ratings and the leaderboard live in the database; the server creates its tables on
+# the first boot (DB_MIGRATE=auto). No secret is written here: Render fills in DATABASE_URL.
+services:
+  - type: web
+    name: circuit-breaker
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /ready
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Render's proxy sets X-Forwarded-For/-Proto: one hop to trust. A number, not "true".
+      - key: TRUST_PROXY
+        value: '1'
+      - key: DATABASE_URL
+        fromDatabase:
+          name: circuit-breaker-db
+          property: connectionString
+
+databases:
+  - name: circuit-breaker-db
+    # Render's free PostgreSQL is time-limited; pick a paid plan for data that must last.
+    plan: free
+    databaseName: circuit_breaker
+    user: cb
+    # Only services in this Render account connect (the internal URL); nothing from outside.
+    ipAllowList: []

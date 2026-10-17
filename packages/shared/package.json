@@ -1,0 +1,20 @@
+{
+  "name": "@circuit-breaker/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Deterministic race simulation shared by client and server: track model, vehicle physics, race rules.",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.3"
+  }
+}

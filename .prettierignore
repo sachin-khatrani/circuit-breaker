@@ -1,0 +1,9 @@
+node_modules/
+dist/
+coverage/
+package-lock.json
+*.tsbuildinfo
+# Design docs keep hand-formatted wide tables.
+docs/
+# Output of the load test (npm run load -w @circuit-breaker/server).
+load-results.json

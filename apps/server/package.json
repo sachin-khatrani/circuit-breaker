@@ -1,0 +1,34 @@
+{
+  "name": "@circuit-breaker/server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Authoritative race server: Socket.IO rooms running the shared 60 Hz simulation, serving the built client in production.",
+  "scripts": {
+    "dev": "tsx watch --clear-screen=false src/index.ts",
+    "build": "tsc --noEmit -p tsconfig.json && node build.mjs",
+    "start": "node --enable-source-maps dist/index.js",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "harness": "tsx scripts/harness.ts",
+    "load": "tsx scripts/load.ts",
+    "dbbench": "tsx scripts/dbbench.ts",
+    "db:migrate": "tsx src/dbcli.ts migrate",
+    "db:status": "tsx src/dbcli.ts status",
+    "db:rollback": "tsx src/dbcli.ts rollback"
+  },
+  "dependencies": {
+    "@circuit-breaker/shared": "*",
+    "pg": "^8.23.1",
+    "socket.io": "^4.8.4"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "@types/node": "^22.20.5",
+    "@types/pg": "^8.23.1",
+    "esbuild": "^0.28.2",
+    "socket.io-client": "^4.8.4",
+    "tsx": "^4.23.15",
+    "vitest": "^5.0.3"
+  }
+}
